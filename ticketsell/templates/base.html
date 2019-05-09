@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <title>购票系统</title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- js -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% block stayle %}
+    {% endblock %}
+
+
+</head>
+<body>
+<!--顶部-->
+<div class="header">
+{% block head %}
+{% endblock %}
+</div>
+
+{% block body %}
+{% endblock %}
+
+<!--底部-->
+<div id="bottom">
+<p>Github: https://github.com/luanshiyinyang/TicketsSell</p>
+    <p>管理员QQ:1695735420</p>
+</div>
+<!--底部-->
+</body>
+<!--自定义脚本-->
+<script src="{% static 'chooseCity.js' %}"></script>
+</html>

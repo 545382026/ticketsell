@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block stayle %}
+<style>
+*{
+    padding: 0px;
+    margin: 0px;
+}
+table{
+    margin: 0 auto;
+    width: 70%;
+    margin-bottom: 100px;
+}
+table th{
+    border:1px solid #cccccc;
+    text-align: center;
+}
+table td{
+    border:1px solid #cccccc;
+    text-align: center;
+}
+table tr{
+    color: #000;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div>
+        <h2 style="text-align: center">可购买车票</h2>
+    </div>
+    <div>
+        <table cellspacing="0">
+            <thead>
+            <tr>
+                <th>车票编号</th>
+                <th>起始站点</th>
+                <th>发车时间</th>
+                <th>座位余量</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.num }}</td>
+                    <td>{{ ticket.name }}</td>
+                    <td>{{ ticket.date_start }}</td>
+                    <td>{{ ticket.seats }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form action="{% url 'ticket_buy' %}" method="get" >
+        <div class="form-group" align="center">
+            <select class="form-control" style="width: 30%" name="number">
+                {% for ticket in tickets %}
+                    <option value="{{ ticket.num }}">{{ ticket.num }}</option>
+                {% endfor %}
+            </select>
+        </div>
+            <div align="center">
+                <button class="btn btn-default btn-sm">购买</button>
+                <a class="btn btn-default btn-sm" href="{%  url 'user_home' %}">返回</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

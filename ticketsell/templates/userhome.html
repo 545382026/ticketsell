@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block head%}
+<!--顶部-->
+    <!--导航栏-->
+    <nav class="navbar navbar-static-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">火车票网络出售平台</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a data-toggle="modal" href="#"><span class="glyphicon glyphicon-user"></span> {{ user_name }}</a>
+                </li>
+                <li>
+                    <a data-toggle="modal"  href="{% url 'home' %}" ><span class="glyphicon glyphicon-log-in"></span> 退出登录</a>
+                </li>
+                <li>
+                    <a data-toggle="modal"  href="{% url 'order_search' %}" ><span class="glyphicon glyphicon-list-alt"></span> 订单查询</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<!--顶部-->
+{% endblock %}
+
+
+{% block body %}
+<!--主体-->
+<div id="content">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form role="form" action="{% url 'tickets_search' %}" method="post" id="" style="border-radius: 5px; margin-top: 20%; position: relative">
+                {% csrf_token %}
+                <div class="chooseCity">
+                    <a href="#">ABCD</a>
+                    <a href="#">EFGH</a>
+                    <a href="#">JKLM</a>
+                    <a href="#">NOPQ</a>
+                    <a href="#">RSTW</a>
+                    <a href="#">XYZ</a>
+                    <hr>
+                    <div class="text">
+
+                    </div>
+                </div>
+                <div class="chooseCity">
+                    <a>ABCD</a>
+                    <a>EFGH</a>
+                    <a>JKLM</a>
+                    <a>NOPQ</a>
+                    <a>RSTW</a>
+                    <a>XYZ</a>
+                    <hr>
+                    <div class="text">
+
+                    </div>
+                </div>
+                <h2 style="text-align: center">购买车票</h2>
+                <div class="form-group">
+                    <label for="start" style="font-size: 20px; line-height: 50px">起始站</label>
+                    <input class="form-control" id="start" placeholder="请填写起始站" name="name_start">
+                </div>
+                <div class="form-group">
+                    <label for="destination"  style="font-size: 20px; line-height: 50px">终点站</label>
+                    <input class="form-control" id="destination" placeholder="请填写终点站" name="name_end">
+                </div>
+                <div class="form-group">
+                    <label for="date"  style="font-size: 20px; line-height: 50px">日期</label>
+                    {{ ticket_search_form.date_start }}
+                </div>
+                <button  class="btn btn-default center-block" style="">查询</button>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+<!--主体-->
+{% endblock %}
+
