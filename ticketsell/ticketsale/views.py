@@ -6,6 +6,7 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from utils.spider_12306 import get_query_list
 import datetime
+import random
 from ticketsell.settings import STATICFILES_DIRS
 from ticketsale.forms import UserLoginForm, UserRegisterForm, TicketSearchForm
 from ticketsale.serializers import TicketsSerializer
@@ -219,7 +220,7 @@ def ticket_buy(request):
         user = Users.objects.filter(phone=username)
         # 购买车票信息
         buy = user[0].buyticket_set.all()
-        print(buy,'**********',user[0])
+        # print(buy,'**********',user[0])
         # 判断用户的账号是否已购买
         if buy:
             content = {
@@ -231,14 +232,13 @@ def ticket_buy(request):
         else:
             ticket = Tickets.objects.filter(num=ticket_number)
             if ticket[0].seats > 0:
-                b = user[0].buyticket_set.all()
                 # print(a,'*******', a.ticket_num)
-                print(ticket[0].num,'*******************',user[0].id)
+                # print(ticket[0].num,'*******************',user[0].id)
                 a = BuyTicket()
                 a.ticket_user_id = Users.objects.get(pk=user[0].id)
                 a.ticket_num = ticket[0].num
                 a.ticket_name = ticket[0].name_start + "-" + ticket[0].name_end
-                a.ticket_seat_num = range(0, ticket[0].seats)
+                a.ticket_seat_num = random.randint(0, ticket[0].seats)
                 a.ticket_time = ticket[0].start_time
                 a.save()
                 Tickets.objects.filter(num=ticket_number).update(seats=ticket[0].seats - 1)
