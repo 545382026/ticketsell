@@ -6,6 +6,7 @@ import re
 from ticketsell.settings import STATICFILES_DIRS
 from ticketsale.models import Tickets
 import random
+import datetime
 '''
 这个模块是要获得全国所有的车次详细信息，并且存入数据库
 然而12306是没有提供这个功能的，只能查询出发地到目的地的车票
@@ -134,6 +135,7 @@ def get_query_list(date):
                     a.start_time = rst_dict["begin_time"]
                     a.end_time = rst_dict["end_time"]
                     a.seats = random.randint(0, 200)
+                    a.save()
                     print(rst_dict)
                     with open(STATICFILES_DIRS[0]+"/"+date+".txt", 'a', encoding='utf-8') as f:
                         f.write(rst_dict["from_city"] + " " + rst_dict["to_city"] + " " + rst_dict["begin_time"]+ " " + rst_dict["end_time"] + " " + rst_dict["trains"] + " ""\n")

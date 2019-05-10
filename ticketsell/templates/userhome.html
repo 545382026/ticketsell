@@ -9,7 +9,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a data-toggle="modal" href="#"><span class="glyphicon glyphicon-user"></span> {{ user_name }}</a>
+                    <a data-toggle="modal" href="{% url 'userinfo' %}"><span class="glyphicon glyphicon-user"></span> {{ user_name }}</a>
                 </li>
                 <li>
                     <a data-toggle="modal"  href="{% url 'home' %}" ><span class="glyphicon glyphicon-log-in"></span> 退出登录</a>

@@ -8,7 +8,7 @@ class Users(models.Model):
     phone = models.CharField(max_length=15, null=False, verbose_name=u'用户手机号')
     password = models.CharField(max_length=20, null=False, verbose_name="账户密码")
     name = models.CharField(max_length=20, null=True, verbose_name=u'用户姓名')
-    name_id = models.IntegerField(null=True, verbose_name=u"用户身份证")
+    name_id = models.CharField(null=True, max_length=20, verbose_name=u"用户身份证")
     createTime = models.DateTimeField(auto_now_add=False, null=False, verbose_name=u'账户创建时间')
     email = models.EmailField(default="", null=False, verbose_name="账户关联邮箱")
 
@@ -50,7 +50,7 @@ class BuyTicket(models.Model):
     # 车票编号是车票编号的唯一区分，用户获得的是自己的车次+座位号
     ticket_num = models.CharField(max_length=10, null=True, verbose_name=u"购买车票编号")
     ticket_name = models.CharField(max_length=20, null=True, verbose_name=u'购买车票起始站点')
-    createTime = models.DateTimeField(auto_now_add=False, null=False, verbose_name=u'购买车票日期')
+    createTime = models.DateTimeField(auto_now_add=False, null=True, verbose_name=u'购买车票日期')
     ticket_seat_num = models.IntegerField(null=True, verbose_name=u"购买车票座位号")
     ticket_time = models.CharField(null=True, max_length=50, verbose_name=u"购买车票发车时间")
 

@@ -1,16 +1,30 @@
-<!--design by 周晨-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>订单查询</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-<div class="container">
+{% extends 'base.html' %}
+{% block head %}
+<!--顶部-->
+    <!--导航栏-->
+    <nav class="navbar navbar-static-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">火车票网络出售平台</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a data-toggle="modal" href="{% url 'userinfo' %}"><span class="glyphicon glyphicon-user"></span> {{ phone }}</a>
+                </li>
+                <li>
+                    <a data-toggle="modal"  href="{% url 'home' %}" ><span class="glyphicon glyphicon-log-in"></span> 退出登录</a>
+                </li>
+                <li>
+                    <a data-toggle="modal"  href="{% url 'order_search' %}" ><span class="glyphicon glyphicon-list-alt"></span> 订单查询</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<!--顶部-->
+{% endblock %}
+
+{% block body %}
+<div class="container" style="margin-bottom: 535px">
     <h3 style="text-align: center">用户订单查询</h3>
     <table class="table table-striped">
         <thead>
@@ -60,5 +74,4 @@
     </div>
 </div>
 
-</body>
-</html>
+{% endblock %}

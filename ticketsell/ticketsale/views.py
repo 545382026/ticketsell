@@ -19,7 +19,7 @@ def database_update():
     # 判断上次更新的时间和点击主页当天的时间差,三天更新一次数据
     today = datetime.datetime.now().date()
     temp = datetime.timedelta(days=1)
-    if (datetime.datetime.now() - datetime.datetime(int(last_update.split('-')[0]), int(last_update.split("-")[1]), int(last_update.split("-")[2]))).days >3:
+    if (datetime.datetime.now() - datetime.datetime(int(last_update.split('-')[0]), int(last_update.split("-")[1]), int(last_update.split("-")[2]))).days >30:
         with open(STATICFILES_DIRS[0] + "/update.log", 'w', encoding='utf-8 ') as f:
             f.write(str(today))
         get_query_list(str(today))
@@ -193,7 +193,9 @@ def tickets_search(request):
             tic = {'num': item.num, 'name': item.name_start + "-" + item.name_end,
                                                 'date_start': item.start_time,"seats": item.seats}
             ticket_list.append(tic)
+        phone = request.COOKIES['username']
         content = {
+            'phone': phone,
             "tickets": ticket_list,
             "user_phone": "",
         }
@@ -270,15 +272,19 @@ def order_search(request):
         # 用户没有买票
         buy = user[0].buyticket_set.all()
         if buy:
+            phone = request.COOKIES['username']
             content = {
                 'result': '已经购票',
                 'userinfo': buy[0],
                 'user': user[0],
+                'phone': phone,
             }
         else:
+            phone = request.COOKIES['username']
             content = {
                 'result': '未购票',
-                'userinfo': user[0].buyticket_set.all()
+                'userinfo': user[0].buyticket_set.all(),
+                'phone': phone,
             }
 
         return render(request, 'order_search.html', context=content)
@@ -307,6 +313,38 @@ def order_cancel(request):
             }
 
         return render(request, 'cancel_after.html', context=content)
+
+def userinfo(request):
+    try:
+        username = request.COOKIES['username']
+    except:
+        username = None
+    if username is None:
+        pass
+        # 用户登录
+    else:
+        user = Users.objects.filter(phone=username)[0]
+        return render(request, 'userinfo.html', {'user': user})
+
+def userchange(request):
+    if request.method == 'POST':
+        username = request.COOKIES['username']
+        phone = request.POST['phone']
+        name = request.POST['name']
+        name_id = request.POST['name_id']
+        email = request.POST['email']
+
+        user = Users.objects.filter(phone=username)[0]
+        print(user.phone, user.name, '**************')
+        user.phone = phone
+        user.name = name
+        user.name_id = name_id
+        user.email = email
+        user.save()
+        return redirect('/userinfo/')
+    else:
+       return HttpResponse('不合法查询')
+
 
 
 class TicketsViewSet(viewsets.ModelViewSet):

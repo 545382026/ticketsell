@@ -28,6 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_start, name='home'),
     path('user_home/', views.index_end, name="user_home"),
+    path('userinfo/', views.userinfo, name="userinfo"),
+    path('userchange/', views.userchange, name='userchange'),
     path('tickets_search/', views.tickets_search, name="tickets_search"),
     path('ticket_buy/', views.ticket_buy, name="ticket_buy"),
     path('register_after/', views.register, name="register_after"),

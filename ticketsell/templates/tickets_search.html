@@ -14,8 +14,32 @@ table td {
 </style>
 {% endblock %}
 
+{% block head %}
+<!--顶部-->
+    <!--导航栏-->
+    <nav class="navbar navbar-static-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">火车票网络出售平台</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a data-toggle="modal" href="{% url 'userinfo' %}"><span class="glyphicon glyphicon-user"></span> {{ phone }}</a>
+                </li>
+                <li>
+                    <a data-toggle="modal"  href="{% url 'home' %}" ><span class="glyphicon glyphicon-log-in"></span> 退出登录</a>
+                </li>
+                <li>
+                    <a data-toggle="modal"  href="{% url 'order_search' %}" ><span class="glyphicon glyphicon-list-alt"></span> 订单查询</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<!--顶部-->
+{% endblock %}
+
 {% block body %}
-<div class="container" style="padding-bottom: 20px">
+<div class="container" style="padding-bottom: 200px">
     <div>
         <h2 style="text-align: center">可购买车票</h2>
     </div>

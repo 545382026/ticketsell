@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block stayle %}
+<link rel="stylesheet" href="../static/js/lib/JQuery/jquery-ui.css">
+<link rel="stylesheet" href="../static/js/lib/bootstrap-3.3.7-dist/css/bootstrap-theme.css">
+<link rel="stylesheet" href="../static/js/lib/bootstrap-3.3.7-dist/css/bootstrap.css">
+<style>
+      .form-control{
+          width: 40%;
+      }
+</style>
+{% endblock %}
+{% block head %}
+<!--顶部-->
+    <!--导航栏-->
+    <nav class="navbar navbar-static-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">火车票网络出售平台</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a data-toggle="modal" href="{% url 'userinfo' %}"><span class="glyphicon glyphicon-user"></span> {{ user.phone }}</a>
+                </li>
+                <li>
+                    <a data-toggle="modal"  href="{% url 'home' %}" ><span class="glyphicon glyphicon-log-in"></span> 退出登录</a>
+                </li>
+                <li>
+                    <a data-toggle="modal"  href="{% url 'order_search' %}" ><span class="glyphicon glyphicon-list-alt"></span> 订单查询</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<!--顶部-->
+{% endblock %}
+
+{% block body %}
+<div class="container" style="padding-bottom: 200px">
+
+{#        <div class="col-md-4">#}
+            <form  action="{% url 'userchange' %}" method="post" >
+                {% csrf_token %}
+                <h2 style="text-align: center">用户信息</h2>
+                <div class="form-group" align="center">
+                    <label for="start" style="font-size: 20px; line-height: 50px">手机号</label>
+                    <input class="form-control" id="start" value="{{ user.phone }}" name="phone">
+                </div>
+                <div class="form-group" align="center">
+                    <label for="destination"  style="font-size: 20px; line-height: 50px">姓名</label>
+                    <input class="form-control" id="destination" value="{{ user.name }}"  name="name">
+                </div>
+                <div class="form-group" align="center">
+                    <label for="date"  style="font-size: 20px; line-height: 50px">用户身份证</label>
+                    <input class="form-control" id="destination" value="{{ user.name_id }}"  name="name_id">
+                </div>
+                <div class="form-group" align="center">
+                    <label for="date"  style="font-size: 20px; line-height: 50px">创建日期</label>
+                    <input class="form-control" id="destination"  readonly='readonly' value="{{ user.createTime }}"  name="time">
+                </div>
+                <div class="form-group" align="center">
+                    <label for="date"  style="font-size: 20px; line-height: 50px">邮箱</label>
+                    <input class="form-control" id="destination" value="{{ user.email }}"  name="email">
+                </div>
+               <div align="center">
+                <button class="btn btn-default btn-success" style="margin-right: 50px">修改</button>
+                <a class="btn btn-default btn-success" href="{%  url 'user_home' %}">返回</a>
+                </div>
+            </form>
+{#        </div>#}
+</div>
+
+{% endblock %}
